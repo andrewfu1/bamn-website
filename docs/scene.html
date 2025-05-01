@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scene API Documentation</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 900px; margin: auto; padding: 1em; font-size: 1em; }
+    nav { margin-bottom: 2em; }
+    nav .nav-group { border: 1px solid #ddd; padding: 0.5em; margin-bottom: 1em; }
+    nav .nav-group h3 { margin: 0.5em 0; font-size: 1.2em; color: #333; border-bottom: 1px solid #ccc; padding-bottom: 0.2em; }
+    nav .nav-group ul { list-style: none; margin: 0; padding: 0; }
+    nav .nav-group ul li { margin: 0.2em 0; }
+    nav .nav-group a { text-decoration: none; font-size: 0.9em; color: #007acc; }
+    nav .nav-group a:hover { text-decoration: underline; }
+    h2, h3 { border-bottom: 2px solid #ccc; padding-bottom: 0.3em; }
+    h3 { margin-top: 1em; }
+    section h2 { font-size: 1.4em; }
+    div[id^="h3d"] p { font-size: 1em; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Scene API Documentation</h1>
+  </header>
+
+  <nav>
+    <div class="nav-group">
+      <h3>Contents</h3>
+      <ul>
+        <li><a href="#gamestate">GameState Struct</a></li>
+        <li><a href="#scene">Scene Class</a></li>
+        <li><a href="#scene-methods">Scene Methods</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <section id="gamestate">
+      <h2>GameState</h2>
+      <p><strong>Description:</strong> Stores simple key-value integer game state.</p>
+      <h3>Fields</h3>
+      <ul>
+        <li><code>int[string] mIntMap</code> - Maps a string key to an integer value.</li>
+      </ul>
+    </section>
+
+    <section id="scene">
+      <h2>Scene</h2>
+      <p><strong>Description:</strong> Represents a scene containing game objects, a tilemap, and associated state.</p>
+      <h3>Fields</h3>
+      <ul>
+        <li><code>GameObject[] gameObjects</code> - List of all active GameObjects in the scene.</li>
+        <li><code>GameState mGameState</code> - Global state information for the scene.</li>
+        <li><code>SDL_Renderer* mRendererRef</code> - Reference to the SDL_Renderer for drawing operations.</li>
+        <li><code>GameObject tilemap</code> - GameObject representing the tilemap.</li>
+        <li><code>bool mActive</code> - Whether the scene is currently active.</li>
+      </ul>
+    </section>
+
+    <section id="scene-methods">
+      <h2>Scene Methods</h2>
+      <ul>
+        <li><strong>this(SDL_Renderer* r, int sceneIndex)</strong>: Constructs a Scene and loads it from a JSON file.</li>
+        <li><strong>GameObject MakePlayer(SDL_Point location)</strong>: Creates and returns a player GameObject at a specified location.</li>
+        <li><strong>void LoadSceneFromJson(string filename)</strong>: Loads a scene from a JSON file, creating GameObjects based on tile definitions.</li>
+        <li><strong>void Input(SDL_Event e)</strong>: Passes an SDL input event to all GameObjects in the scene.</li>
+        <li><strong>void Update()</strong>: Updates all GameObjects and performs collision detection and cleanup.</li>
+        <li><strong>void Render()</strong>: Renders all GameObjects in the scene.</li>
+        <li><strong>void AddGameObject(GameObject go)</strong>: Adds a GameObject to the scene.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+  </footer>
+</body>
+</html>

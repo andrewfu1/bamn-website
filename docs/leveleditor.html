@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Level Editor API Documentation</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 960px; margin: auto; padding: 1em; font-size: 1em; }
+    nav { margin-bottom: 2em; }
+    nav .nav-group { border: 1px solid #ddd; padding: 0.5em; margin-bottom: 1em; }
+    nav .nav-group h3 { margin: 0.5em 0; font-size: 1.2em; color: #333; border-bottom: 1px solid #ccc; padding-bottom: 0.2em; }
+    nav .nav-group ul { list-style: none; margin: 0; padding: 0; }
+    nav .nav-group ul li { margin: 0.2em 0; }
+    nav .nav-group a { text-decoration: none; font-size: 0.9em; color: #007acc; }
+    nav .nav-group a:hover { text-decoration: underline; }
+    h2, h3 { border-bottom: 2px solid #ccc; padding-bottom: 0.3em; }
+    h3 { margin-top: 1em; }
+    section h2 { font-size: 1.4em; }
+    div[id^="h3d"] p { font-size: 1em; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Level Editor API Documentation</h1>
+  </header>
+
+  <nav>
+    <div class="nav-group">
+      <h3>Contents</h3>
+      <ul>
+        <li><a href="#tilemap">Tilemap and Texture Classes</a></li>
+        <li><a href="#brushbutton">BrushButton Class</a></li>
+        <li><a href="#scenebutton">SceneButton Class</a></li>
+        <li><a href="#editor">Editor Class</a></li>
+        <li><a href="#grid">Grid Class</a></li>
+        <li><a href="#ui">UserInterface and Button Classes</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <section id="tilemap">
+      <h2>Tilemap and Texture Classes</h2>
+      <h3>Texture</h3>
+      <p>Handles loading BMP images as SDL_Textures and supports rendering with transparency (color key for black).</p>
+      <h3>Tilemap</h3>
+      <p>Handles reading a tile layout from JSON metadata and rendering individual tiles from a texture atlas.</p>
+    </section>
+
+    <section id="brushbutton">
+      <h2>BrushButton Class</h2>
+      <p>BrushButton allows selecting different brush types used for painting tiles onto the grid. Inherits from <code>Button</code>. Highlights the button with a red border when selected.</p>
+      <h3>Key Methods</h3>
+      <ul>
+        <li><strong>Clicked</strong>: Sets the brush type on click.</li>
+        <li><strong>Dragged</strong>: Placeholder for drag behavior.</li>
+        <li><strong>Render</strong>: Renders a red border if the button is selected.</li>
+      </ul>
+    </section>
+
+    <section id="scenebutton">
+      <h2>SceneButton Class</h2>
+      <p>SceneButton lets the user select which scene (level) is active for editing. Inherits from <code>Button</code>.</p>
+      <h3>Key Fields and Methods</h3>
+      <ul>
+        <li><strong>sceneNum</strong>: The scene number associated with this button.</li>
+        <li><strong>sceneSetter</strong>: Delegate callback to change the active scene.</li>
+        <li><strong>Clicked</strong>: Calls <code>sceneSetter</code> to update the scene.</li>
+        <li><strong>Render</strong>: Highlights the button if its scene is active.</li>
+      </ul>
+    </section>
+
+    <section id="editor">
+      <h2>Editor Class</h2>
+      <p>The main application class for the level editor. Manages loading, saving, rendering scenes, and handling UI interactions.</p>
+      <h3>Core Responsibilities</h3>
+      <ul>
+        <li><strong>Initialization</strong>: Loads background, tilemap, buttons, and scene buttons.</li>
+        <li><strong>PlayClicked</strong>: Saves the current scene and triggers application switch.</li>
+        <li><strong>SwitchScene</strong>: Saves current scene, loads another scene.</li>
+        <li><strong>LoadScene</strong>: Loads scene JSON into the grid.</li>
+        <li><strong>SaveCurrentScene</strong>: Serializes the current grid into a JSON file.</li>
+        <li><strong>Input</strong>: Processes SDL input events and forwards them to the UI.</li>
+        <li><strong>Render</strong>: Draws the background and UI components.</li>
+        <li><strong>Tick</strong>: Renders and processes input each frame.</li>
+        <li><strong>Start/Stop</strong>: Load and save the scene at editor startup and shutdown.</li>
+      </ul>
+    </section>
+
+    <section id="grid">
+      <h2>Grid Class</h2>
+      <p>Grid manages the interactive tilemap where users paint with different brushes to edit levels. Inherits from <code>Button</code>.</p>
+      <h3>Responsibilities</h3>
+      <ul>
+        <li><strong>Clicked</strong>: Handles placing tiles according to the current brush.</li>
+        <li><strong>BrushToIndex</strong>: Maps brush type to tile type with additional checks for special tiles (start, end, spikes, arrows).</li>
+        <li><strong>RecalculateTile/RecalculateSurroundings</strong>: Updates neighboring tiles intelligently after a tile change.</li>
+        <li><strong>Render</strong>: Draws all tiles and overlays the visual grid lines.</li>
+      </ul>
+    </section>
+
+    <section id="ui">
+      <h2>UserInterface and Button Classes</h2>
+      <h3>Button</h3>
+      <p>A basic clickable and draggable UI element. Used as the base class for <code>BrushButton</code>, <code>SceneButton</code>, and <code>Grid</code>.</p>
+      <h3>UserInterface</h3>
+      <p>Manages a collection of buttons. Processes clicks and drag events, and forwards rendering calls to all buttons.</p>
+      <h3>Key Methods</h3>
+      <ul>
+        <li><strong>AddButton</strong>: Adds a new button to the UI.</li>
+        <li><strong>CheckClick</strong>: Detects clicks and drags on buttons.</li>
+        <li><strong>Render</strong>: Calls <code>Render</code> on all buttons.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+  </footer>
+</body>
+</html>
