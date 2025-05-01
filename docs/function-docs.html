@@ -26,99 +26,87 @@
 </head>
 <body>
   <header>
-    <h1>Game Engine API Documentation</h1>
+    <h1>Level Editor & Game Engine API</h1>
+    <p>This documentation describes the core modules and types used in the custom SDL-based level editor engine.</p>
   </header>
+
   <nav>
     <div class="nav-group">
-      <h3>Overview</h3>
+      <h3>Modules</h3>
       <ul>
-        <li><a href="#summary">Summary</a></li>
-        <li><a href="#conventions">Conventions</a></li>
-        <li><a href="#typedefs-constants">Typedefs &amp; Constants</a></li>
-        <li><a href="leveleditor.html">Level Editor</a></li>
-        <li><a href="tilemap.html">TileMap</a></li>
-        <li><a href="scene.html">Scene</a></li>
-      </ul>
-    </div>
-    <div class="nav-group">
-      <h3>Types &amp; Enumerations</h3>
-      <ul>
-        <li><a href="#enumerations">All Enums</a></li>
-        <li><a href="#H3DRenderDevice">H3DRenderDevice</a></li>
-        <li><a href="#H3DOptions">H3DOptions</a></li>
-        <!-- Add more enum links -->
-      </ul>
-    </div>
-    <div class="nav-group">
-      <h3>Function Categories</h3>
-      <ul>
-        <li><a href="#basic-functions">Basic Functions</a></li>
-        <li><a href="#general-resource-management">General Resource Management</a></li>
-        <li><a href="#scene-graph">Scene Graph Functions</a></li>
+        <li><a href="#ui">User Interface</a></li>
+        <li><a href="#brushbutton">Brush Button</a></li>
+        <li><a href="#scenebutton">Scene Button</a></li>
+        <li><a href="#grid">Tile Grid</a></li>
+        <li><a href="#editor">Editor</a></li>
+        <li><a href="#tilemap">TileMap & Texture</a></li>
       </ul>
     </div>
   </nav>
 
   <main>
-    <section id="summary">
-      <h2>Summary</h2>
-      <p>Placeholder for summary of the Horde3D-like API.</p>
-    </section>
-
-    <section id="conventions">
-      <h2>Conventions</h2>
-      <p>Placeholder for API conventions (coordinate system, rotation order, matrix layout, etc.).</p>
-    </section>
-
-    <section id="typedefs-constants">
-      <h2>Typedefs &amp; Constants</h2>
-      <h3 style="font-weight: normal;">Typedefs</h3>
+    <section id="ui">
+      <h2>User Interface</h2>
+      <p><strong>Module:</strong> LevelEditor.UI</p>
+      <p>A lightweight UI manager that stores and manages interactive buttons.</p>
       <ul>
-        <li>H3DRes: handle to resource (int32)</li>
-        <li>H3DNode: handle to scene node (int32)</li>
-      </ul>
-      <h3 style="font-weight: normal;">Predefined Constants</h3>
-      <ul>
-        <li>H3DRootNode: Scene root node handle</li>
+        <li><code>Button</code> – Base class for all clickable elements. Defines <code>onClick</code> and <code>onDragOver</code>.</li>
+        <li><code>UserInterface</code> – Stores buttons and dispatches input/render events to them.</li>
       </ul>
     </section>
 
-    <section id="enumerations">
-      <h2>Enumerations</h2>
-      <p>Placeholder for all enumeration definitions.</p>
+    <section id="brushbutton">
+      <h2>Brush Button</h2>
+      <p><strong>Module:</strong> LevelEditor.brushbutton</p>
+      <p>Specialized UI button used to select brush types. Highlights when selected.</p>
+      <ul>
+        <li><code>BrushButton</code> – Inherits from <code>Button</code>. Sets the active brush pointer when clicked.</li>
+      </ul>
     </section>
 
-    <section id="basic-functions">
-      <h2>Basic Functions</h2>
-      <div id="h3dGetVersionString">
-        <h3>h3dGetVersionString()</h3>
-        <p>Placeholder for function details.</p>
-        <p>More details coming soon.</p>
-      </div>
-      <div id="h3dCheckExtension">
-        <h3>h3dCheckExtension()</h3>
-        <p>Placeholder for function details.</p>
-        <p>More details coming soon.</p>
-      </div>
-      <!-- More basic function placeholders -->
+    <section id="scenebutton">
+      <h2>Scene Button</h2>
+      <p><strong>Module:</strong> LevelEditor.buttons</p>
+      <p>Represents buttons that switch between scenes.</p>
+      <ul>
+        <li><code>SceneButton</code> – Calls a delegate to switch scenes and highlights when selected.</li>
+      </ul>
     </section>
 
-    <section id="general-resource-management">
-      <h2>General Resource Management Functions</h2>
-      <p>Placeholder for resource management functions and descriptions.</p>
+    <section id="grid">
+      <h2>Tile Grid</h2>
+      <p><strong>Module:</strong> LevelEditor.grid</p>
+      <p>Handles the drawing and editing of the level’s tile grid using brush interactions.</p>
+      <ul>
+        <li>Supports auto-blending for platforms using binary rules.</li>
+        <li>Only one <code>start</code> and one <code>end</code> tile allowed per scene.</li>
+      </ul>
     </section>
 
-    <section id="scene-graph">
-      <h2>Scene Graph Functions</h2>
-      <p>Placeholder for scene graph manipulation functions.</p>
+    <section id="editor">
+      <h2>Editor</h2>
+      <p><strong>Module:</strong> LevelEditor.editor</p>
+      <p>Main application class that initializes the grid, UI, and handles scene management.</p>
+      <ul>
+        <li>Initializes all buttons (brushes, scenes, play).</li>
+        <li>Handles input and rendering each frame.</li>
+        <li>Reads/writes level state from/to JSON files.</li>
+      </ul>
     </section>
 
-    <!-- Additional sections for specific subsystems -->
-
+    <section id="tilemap">
+      <h2>TileMap & Texture</h2>
+      <p><strong>Module:</strong> LevelEditor.tilemap</p>
+      <p>Manages tiled texture rendering and parsing of tile metadata.</p>
+      <ul>
+        <li><code>Texture</code> – Loads BMP images and renders them with colorkey transparency.</li>
+        <li><code>Tilemap</code> – Uses a JSON metadata file to extract and manage tile source rectangles.</li>
+      </ul>
+    </section>
   </main>
 
   <footer>
-    <p>© 2025 Game Engine Project</p>
+    <p>© 2025 Level Editor Engine – All rights reserved.</p>
   </footer>
 </body>
 </html>
