@@ -32,7 +32,7 @@
 
   <nav>
     <div class="nav-group">
-      <h3>Modules</h3>
+      <h3>Tile Editor</h3>
       <ul>
         <li><a href="#ui">User Interface</a></li>
         <li><a href="#brushbutton">Brush Button</a></li>
@@ -42,6 +42,18 @@
         <li><a href="#tilemap">TileMap & Texture</a></li>
       </ul>
     </div>
+    <div class="nav-group">
+      <h3>Game Runtime</h3>
+      <ul>
+        <li><a href="#gameobject">GameObject</a></li>
+        <li><a href="#components">Components</a></li>
+        <li><a href="#scene">Scene</a></li>
+        <li><a href="#gameapplication">GameApplication</a></li>
+        <li><a href="#resourcemanager">Resource Manager</a></li>
+        <li><a href="#tilemapcomponents">Tilemap Components</a></li>
+      </ul>
+    </div>
+
   </nav>
 
   <main>
@@ -103,6 +115,65 @@
         <li><code>Tilemap</code> – Uses a JSON metadata file to extract and manage tile source rectangles.</li>
       </ul>
     </section>
+
+    <section id="gameobject">
+      <h2>GameObject System</h2>
+      <p><strong>Module:</strong> GameCode.gameobject</p>
+      <ul>
+        <li><code>GameObject</code> – Core entity that owns components.</li>
+        <li><code>GameObjectFactory</code> – Metaprogrammed function for building GameObjects with component sets.</li>
+        <li><code>MakeSprite</code>, <code>MakeCollider</code> – Useful aliases for common factory setups.</li>
+      </ul>
+    </section>
+    
+    <section id="components">
+      <h2>Component System</h2>
+      <p><strong>Module:</strong> GameCode.component</p>
+      <ul>
+        <li><code>IComponent</code> – Base class inherited by all components.</li>
+        <li><code>TextureComponent</code>, <code>SpriteComponent</code>, <code>InputComponent</code> – Core render/input/anim logic.</li>
+        <li><code>TransformComponent</code> – Stores and updates object position and rotation.</li>
+        <li><code>ColliderComponent</code> – Axis-aligned bounding box collider with collision check support.</li>
+      </ul>
+    </section>
+    
+    <section id="scene">
+      <h2>Scene System</h2>
+      <p><strong>Module:</strong> GameCode.scene</p>
+      <ul>
+        <li><code>Scene</code> – Manages a tilemap and collection of GameObjects. Loads data from JSON maps.</li>
+        <li><code>LoadSceneFromJson</code> – Parses tilemaps and populates object data.</li>
+        <li><code>MakePlayer</code>, <code>MakeShooter</code>, <code>MakeSpike</code>, etc. – Factory methods for populating standard entities.</li>
+      </ul>
+    </section>
+    
+    <section id="gameapplication">
+      <h2>Game Application</h2>
+      <p><strong>Module:</strong> GameCode.gameapplication</p>
+      <ul>
+        <li><code>GameApplication</code> – Main loop handler for scene switching and game updates.</li>
+        <li><code>Tick()</code> – Handles frame advancement (input → render → update).</li>
+      </ul>
+    </section>
+    
+    <section id="resourcemanager">
+      <h2>Resource Manager</h2>
+      <p><strong>Module:</strong> GameCode.resourcemanager</p>
+      <ul>
+        <li><code>ResourceManager</code> – Singleton that manages image loading and deduplication.</li>
+        <li>Automatically loads SDL_Textures and stores them by filename.</li>
+      </ul>
+    </section>
+    
+    <section id="tilemapcomponents">
+      <h2>Tilemap Components</h2>
+      <p><strong>Module:</strong> GameCode.tilemapcomponents</p>
+      <ul>
+        <li><code>TilemapSprite</code> – Efficient renderer for large tile-based maps.</li>
+        <li><code>TilemapCollider</code> – Efficient grid-based collision checker (wall-based).</li>
+      </ul>
+    </section>
+
   </main>
 
   <footer>
