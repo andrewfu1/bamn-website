@@ -53,6 +53,14 @@
       border-radius: 6px;
       margin-top: 10px;
     }
+
+    img.aspect-4x3 {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      /* force a 4:3 box */
+      object-fit: cover;
+      border: 0;
+    }
   </style>
 </head>
 
@@ -63,15 +71,17 @@
 
   <div class="section">
     <h2>Trailer</h2>
-    <iframe src="https://www.youtube.com/embed/7RJcTSc5v3I?si=65ywoQfc_eKjagEU"
-      title="YouTube video player" frameborder="0"
+    <iframe src="https://www.youtube.com/embed/7RJcTSc5v3I?si=65ywoQfc_eKjagEU" title="YouTube video player"
+      frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
   </div>
 
   <div class="section">
     <h2>Screenshots</h2>
-    <div class="image-placeholder">[ Images Coming Soon ]</div>
+    <img class="aspect-4x3" src="images/screenshot1.png" alt="Gameplay">
+    <img class="aspect-4x3" src="images/screenshot2.png" alt="Editor">
+    <img class="aspect-4x3" src="images/screenshot3.png" alt="Crazy Level!">
   </div>
 
   <div class="section">
