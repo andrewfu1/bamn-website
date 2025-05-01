@@ -53,7 +53,14 @@
         <li><a href="#tilemapcomponents">Tilemap Components</a></li>
       </ul>
     </div>
-
+    <div class="nav-group">
+      <h3>Scripting System</h3>
+      <ul>
+        <li><a href="#script-base">Script Base</a></li>
+        <li><a href="#player-script">Player Script</a></li>
+        <li><a href="#shooter-script">Shooter & Arrow</a></li>
+      </ul>
+    </div>
   </nav>
 
   <main>
@@ -173,6 +180,38 @@
         <li><code>TilemapCollider</code> – Efficient grid-based collision checker (wall-based).</li>
       </ul>
     </section>
+    
+    <section id="script-base">
+      <h2>Script Base</h2>
+      <p><strong>Module:</strong> GameCode.scripts.script</p>
+      <p>The scripting system is based on a single <code>ScriptComponent</code> per <code>GameObject</code>. It defines a virtual <code>Update()</code> method.</p>
+      <ul>
+        <li><code>ScriptComponent</code> – Abstract base class for user-defined game logic.</li>
+        <li>Attached to GameObjects via the <code>ComponentType.SCRIPT</code> type.</li>
+      </ul>
+    </section>
+    
+    <section id="player-script">
+      <h2>Player Script</h2>
+      <p><strong>Module:</strong> GameCode.scripts.player</p>
+      <p>This script implements movement, jumping, gravity, collisions, and animation for the player character.</p>
+      <ul>
+        <li>Handles jumping, ceiling/floor detection, and state transitions (grounded/airborne).</li>
+        <li>Interacts with <code>InputComponent</code>, <code>SpriteComponent</code>, and <code>ColliderComponent</code>.</li>
+        <li>Kills player on spike/arrow collision; ends level on apple collection.</li>
+      </ul>
+    </section>
+    
+    <section id="shooter-script">
+      <h2>Shooter & Arrow Scripts</h2>
+      <p><strong>Modules:</strong> GameCode.scripts.shooter</p>
+      <ul>
+        <li><code>Shooter</code> – Fires projectiles at intervals. Spawns <code>Arrow</code> GameObjects.</li>
+        <li><code>Arrow</code> – Projectile logic that travels left/right and dies on tilemap collision.</li>
+        <li>Uses <code>spawnFunction</code> delegate to instantiate new GameObjects.</li>
+      </ul>
+    </section>
+
 
   </main>
 
