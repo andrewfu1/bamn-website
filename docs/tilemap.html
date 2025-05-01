@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tilemap Components Documentation</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 900px; margin: auto; padding: 1em; font-size: 1em; }
+    nav { margin-bottom: 2em; }
+    nav .nav-group { border: 1px solid #ddd; padding: 0.5em; margin-bottom: 1em; }
+    nav .nav-group h3 { margin: 0.5em 0; font-size: 1.2em; color: #333; border-bottom: 1px solid #ccc; padding-bottom: 0.2em; }
+    nav .nav-group ul { list-style: none; margin: 0; padding: 0; }
+    nav .nav-group ul li { margin: 0.2em 0; }
+    nav .nav-group a { text-decoration: none; font-size: 0.9em; color: #007acc; }
+    nav .nav-group a:hover { text-decoration: underline; }
+    h2, h3 { border-bottom: 2px solid #ccc; padding-bottom: 0.3em; }
+    h3 { margin-top: 1em; }
+    section h2 { font-size: 1.4em; }
+    div[id^="h3d"] p { font-size: 1em; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Tilemap Components Documentation</h1>
+  </header>
+
+  <nav>
+    <div class="nav-group">
+      <h3>Overview</h3>
+      <ul>
+        <li><a href="#overview">Summary</a></li>
+        <li><a href="#tilemap-sprite">TilemapSprite</a></li>
+        <li><a href="#tilemap-collider">TilemapCollider</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <section id="overview">
+      <h2>Summary</h2>
+      <p>These components are just for the background and platform tiles of the tilemap. This could be done with ordinary colliders, but that's inefficient for static environments.</p>
+    </section>
+
+    <section id="tilemap-sprite">
+      <h2>TilemapSprite</h2>
+      <p><strong>Description:</strong> A component that renders a static tilemap background using a texture atlas.</p>
+      <h3>Fields</h3>
+      <ul>
+        <li><code>tiles</code>: 2D array representing tile indices at each grid location.</li>
+        <li><code>mFrames</code>: List of source rectangles for each tile.</li>
+        <li><code>mRendererRef</code>: SDL_Renderer reference for drawing.</li>
+        <li><code>mTextureRef</code>: Reference to the TextureComponent providing the tilemap texture.</li>
+      </ul>
+
+      <h3>Methods</h3>
+      <ul>
+        <li><strong>this(GameObject owner)</strong>: Constructs a TilemapSprite attached to a GameObject.</li>
+        <li><strong>LoadMetaData(string filename)</strong>: Loads tile layout metadata from a JSON file.<br><em>Params:</em> <code>filename</code> - Path to the JSON file.</li>
+        <li><strong>Render()</strong>: Renders the full tilemap to the screen.</li>
+        <li><strong>RenderTile(int index, SDL_Rect* location)</strong>: Renders a single tile based on its index.<br><em>Params:</em> <code>index</code> (tile index), <code>location</code> (destination rectangle).</li>
+      </ul>
+    </section>
+
+    <section id="tilemap-collider">
+      <h2>TilemapCollider</h2>
+      <p><strong>Description:</strong> A component that handles collision detection against static tiles in the tilemap.</p>
+
+      <h3>Fields</h3>
+      <ul>
+        <li><code>tiles</code>: 2D array representing tile indices.</li>
+      </ul>
+
+      <h3>Methods</h3>
+      <ul>
+        <li><strong>this(GameObject owner)</strong>: Constructs a TilemapCollider attached to a GameObject.</li>
+        <li><strong>GetWallCollisions(SDL_Rect* rect)</strong>: Returns a list of wall collision rectangles intersecting a given rectangle.<br><em>Params:</em> <code>rect</code> - Rectangle to check collisions against.<br><em>Returns:</em> Array of SDL_Rects representing collisions.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Game Engine Project</p>
+  </footer>
+</body>
+</html>
